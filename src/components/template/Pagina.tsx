@@ -17,7 +17,7 @@ export default function Pagina(props: PaginaProps) {
       {/* Elemento filho (conteúdo da página) */}
       <main
         className={`
-      w-[90vw] w-[1200px] max-w-[1200px] mx-auto
+      w-[90vw] max-w-[1200px] mx-auto
       flex-1
       py-10
       ${props.className}
