@@ -1,3 +1,4 @@
+import Carrinho from "./Carrinho"
 import Logo from "./Logo"
 
 /** Componente do cabeçalho do site. */
@@ -11,8 +12,8 @@ export default function Cabecalho() {
     >
       {/* Logo (link pra tela inicial) */}
       <Logo />
-
       {/* Botão de carrinho */}
+      <Carrinho />
     </header>
   )
 }
