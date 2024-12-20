@@ -1,4 +1,6 @@
+import Pagina from "@/components/template/Pagina"
+
 /** Componente da página. */
 export default function Home() {
-  return <div>Início</div>
+  return <Pagina>Olá, mundo!</Pagina>
 }

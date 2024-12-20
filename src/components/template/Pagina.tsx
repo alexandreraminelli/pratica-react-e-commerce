@@ -1,3 +1,5 @@
+import Cabecalho from "./Cabecalho"
+
 /** Interface dos props do componente `Pagina`. */
 export interface PaginaProps {
   /** Elemento filho. */
@@ -9,9 +11,11 @@ export interface PaginaProps {
 /** Componente com o template de uma página. */
 export default function Pagina(props: PaginaProps) {
   return (
-    <div>
-      {/* Elemento filho */}
-      {props.children}
+    <div className="flex flex-col">
+      {/* Cabeçalho */}
+      <Cabecalho />
+      {/* Elemento filho (conteúdo da página) */}
+      <main>{props.children}</main>
     </div>
   )
 }
