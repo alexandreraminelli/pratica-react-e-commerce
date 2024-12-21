@@ -19,18 +19,18 @@ export default function CartaoProduto(props: CartaoProdutoProps) {
   }).format(preco)
 
   return (
-    <div className="flex flex-col w-72 bg-zinc-900">
+    <div className="flex flex-col w-72 bg-zinc-900 rounded-lg overflow-clip">
       {/* Imagem */}
       <div className="relative w-72 h-52">
         <Image src={imagem} alt={nome} fill className="object-cover" />
       </div>
 
       {/* Informações */}
-      <div className="flex-1 p-4">
+      <div className="flex-1 p-4 text-white">
         {/* Nome */}
         <h2 className="text-xl font-bold">{nome}</h2>
         {/* Descrição */}
-        <p className="text-sm text-zinc-40 0">{descricao}</p>
+        <p className="text-sm text-zinc-400 0">{descricao}</p>
 
         <div className="flex justify-between items-center">
           {/* Preço */}
