@@ -12,6 +12,8 @@ interface ContextoCarrinhoProps {
   qtdeDeItens: number
   /** Função que adiciona um item (do modelo Produto) ao carrinho. */
   adicionar: (item: Produto) => void
+  /** Função que remove um item (do modelo Produto) do carrinho. */
+  remover: (item: Produto) => void
 }
 
 /** Contexto do carrinho de compras. */
@@ -47,12 +49,26 @@ export function ProvedorCarrinho(props: any) {
     }
   }
 
+  /** Função que remove um item do carrinho. */
+  function remover(produto: Produto) {
+    const novosItens = itens
+      .map((i) => {
+        if (i.produto.id === produto.id) {
+          i.quantidade--
+        }
+        return i
+      })
+      .filter((i) => i.quantidade > 0) // remover produtos que não tenham nenhum item no carrinho
+    setItens(novosItens)
+  }
+
   // retorno do componente
   return (
     <ContextoCarrinho.Provider
       value={{
         itens,
         adicionar,
+        remover,
         get qtdeDeItens() {
           return itens.reduce((total, item) => total + item.quantidade, 0)
         },
