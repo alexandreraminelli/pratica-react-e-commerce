@@ -1,8 +1,9 @@
 "use client"
 
-import { createContext, useState } from "react"
+import { createContext, useEffect, useState } from "react"
 import ItemCarrinho from "../model/ItemCarrinho"
 import Produto from "../model/Produto"
+import useLocalStorage from "../hooks/useLocalStorage"
 
 /** Interface dos props do contexto `ContextoCarrinho`. */
 interface ContextoCarrinhoProps {
@@ -26,6 +27,16 @@ export function ProvedorCarrinho(props: any) {
    * Valor inicial: Array vazio.
    */
   const [itens, setItens] = useState<ItemCarrinho[]>([])
+  // hook para armazenar e recuperar dados no Local Storage
+  const { set, get } = useLocalStorage()
+
+  // obter itens do Local Storage do browser
+  useEffect(() => {
+    const carrinho = get("carrinho")
+    if (carrinho) {
+      setItens(carrinho)
+    }
+  }, [get])
 
   /** Função que adiciona um item no carrinho. */
   function adicionar(produto: Produto) {
@@ -39,13 +50,13 @@ export function ProvedorCarrinho(props: any) {
       indice === -1 // produto não está no carrinho
     ) {
       // Adicionar o item ao carrinho
-      setItens([...itens, { produto, quantidade: 1 }])
+      alterarItens([...itens, { produto, quantidade: 1 }])
     } else {
       // produto está no carrinho
       // Incrementar a quantidade do item
       const novosItens = [...itens]
       novosItens[indice].quantidade++
-      setItens(novosItens)
+      alterarItens(novosItens)
     }
   }
 
@@ -59,7 +70,15 @@ export function ProvedorCarrinho(props: any) {
         return i
       })
       .filter((i) => i.quantidade > 0) // remover produtos que não tenham nenhum item no carrinho
+    alterarItens(novosItens)
+  }
+
+  /** Altera os itens. */
+  function alterarItens(novosItens: ItemCarrinho[]) {
+    // chamar função que atualiza o estado (quantidade de itens no carrinho)
     setItens(novosItens)
+    // salvar os itens no Local Storage
+    set("carrinho", novosItens)
   }
 
   // retorno do componente
