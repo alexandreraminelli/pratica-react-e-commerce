@@ -7,7 +7,7 @@ export default function Cabecalho() {
     <header
       className="
     flex justify-between items-center
-    bg-zinc-800 h-20 px-10
+    bg-zinc-800 h-20 px-10 text-white
     "
     >
       {/* Logo (link pra tela inicial) */}
