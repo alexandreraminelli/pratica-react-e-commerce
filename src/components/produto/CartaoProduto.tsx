@@ -1,3 +1,4 @@
+import useCarrinho from "@/data/hooks/useCarrinho"
 import Produto from "@/data/model/Produto"
 import Image from "next/image"
 
@@ -9,6 +10,9 @@ interface CartaoProdutoProps {
 
 /** Componente do card de produto. */
 export default function CartaoProduto(props: CartaoProdutoProps) {
+  // usar contexto do carrinho
+  const { adicionar } = useCarrinho()
+
   // Obter atributos do produto
   const { nome, descricao, preco, imagem } = props.produto
 
@@ -36,7 +40,9 @@ export default function CartaoProduto(props: CartaoProdutoProps) {
           {/* Preço */}
           <span className="text-lg font-semibold mt-2">{precoFormatado}</span>
           {/* Botão de adicionar ao carrinho */}
-          <button className="border rounded-full px-5 py-1 text-sm">Adicionar</button>
+          <button onClick={() => adicionar(props.produto)} className="border rounded-full px-5 py-1 text-sm">
+            Adicionar
+          </button>
         </div>
       </div>
     </div>

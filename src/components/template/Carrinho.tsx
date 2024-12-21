@@ -1,8 +1,13 @@
+import useCarrinho from "@/data/hooks/useCarrinho"
 import { IconShoppingCart } from "@tabler/icons-react"
 import Link from "next/link"
 
 /** Componente do botão de carrinho do cabeçalho. */
 export default function Carrinho() {
+  // obter a quantidade de itens no carrinho
+  const { qtdeDeItens } = useCarrinho()
+
+  // retorno do componente
   return (
     <Link href="/carrinho">
       <div
@@ -11,7 +16,7 @@ export default function Carrinho() {
       >
         {/* Ícone de carrinho */}
         <IconShoppingCart size={32} stroke={1} />
-        {/* Quantidade de itens */}
+        {/* Círculo com a quantidade de itens */}
         <div
           className="
         absolute -top-2.5 -right-2.5
@@ -20,7 +25,7 @@ export default function Carrinho() {
         flex justify-center items-center
         text-xs"
         >
-          54
+          {qtdeDeItens}
         </div>
       </div>
     </Link>
